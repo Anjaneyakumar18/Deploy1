@@ -8,3 +8,6 @@ def test(request):
 
 def testtemplate(request):
     return render(request,"hello.html")
+
+def Welcome(request):
+    return render(request,"welcome.html")
