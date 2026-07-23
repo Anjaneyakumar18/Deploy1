@@ -1,0 +1,41 @@
+[33mcommit beb5df5a71fbe3db779158f167e79f51caaa7c51[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Anjaneya Kumar <anjaneyakumar1804@gmail.com>
+Date:   Thu Jul 23 15:47:48 2026 +0530
+
+    Added student table
+
+[33mcommit 541e0880ec4b8b9ce48fdea7938b3a41f157f3cd[m
+Author: Anjaneya Kumar <anjaneyakumar1804@gmail.com>
+Date:   Thu Jul 23 14:53:07 2026 +0530
+
+    added DB
+
+[33mcommit 686a829a2db70664b4168386e59086652d43a564[m
+Author: Anjaneya Kumar <anjaneyakumar1804@gmail.com>
+Date:   Thu Jul 23 09:19:57 2026 +0530
+
+    added new template
+
+[33mcommit f26b662748ecee622fee16068c13b5ecb3271dc6[m
+Author: Anjaneya Kumar <anjaneyakumar1804@gmail.com>
+Date:   Thu Jul 23 09:10:40 2026 +0530
+
+    Fix ALLOWED_HOSTS
+
+[33mcommit fcdc559cabd59fa3eecb27d94c78b642aad2926f[m
+Author: Anjaneya Kumar <anjaneyakumar1804@gmail.com>
+Date:   Thu Jul 23 09:02:58 2026 +0530
+
+    Updated settings for deployment
+
+[33mcommit aea5e3e83356a69ee9a9b2973420517d672d0456[m
+Author: Anjaneya Kumar <anjaneyakumar1804@gmail.com>
+Date:   Thu Jul 23 09:00:46 2026 +0530
+
+    Added deployment files
+
+[33mcommit 03ad77b6f16cc9549e7bbb49e082c48fe199cf35[m
+Author: Anjaneya Kumar <anjaneyakumar1804@gmail.com>
+Date:   Wed Jul 22 20:47:35 2026 +0530
+
+    First Commit
