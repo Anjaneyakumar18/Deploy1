@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Django CRUD Demo</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    padding:40px;
+}
+
+.container{
+    width:420px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#333;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    outline:none;
+    font-size:15px;
+}
+
+input:focus{
+    border-color:#2563eb;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.submit-btn{
+    background:#2563eb;
+}
+
+.submit-btn:hover{
+    background:#1d4ed8;
+}
+
+.view-btn{
+    background:#16a34a;
+}
+
+.view-btn:hover{
+    background:#15803d;
+}
+
+.status{
+    margin-top:15px;
+    text-align:center;
+    font-weight:bold;
+    color:green;
+}
+
+.table-container{
+    margin:40px auto;
+    width:80%;
+    display:none;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+th{
+    background:#2563eb;
+    color:white;
+    padding:12px;
+}
+
+td{
+    padding:12px;
+    border:1px solid #ddd;
+    text-align:center;
+}
+
+tr:nth-child(even){
+    background:#f9f9f9;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>User Registration</h2>
+
+    <input
+        type="text"
+        class="name"
+        placeholder="Username">
+
+    <input
+        type="password"
+        class="password"
+        placeholder="Password">
+
+    <button
+        class="submit-btn"
+        onclick="submitData()">
+        Submit
+    </button>
+
+    <button
+        class="view-btn"
+        onclick="getAllUsers()">
+        View All Users
+    </button>
+
+    <div class="status">
+        Ready
+    </div>
+
+</div>
+
+<div class="table-container">
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+
+        <tbody id="tbody">
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<script>
+
+async function submitData(){
+
+    const name=document.querySelector(".name").value.trim();
+    const password=document.querySelector(".password").value.trim();
+
+    if(!name || !password){
+        alert("Please fill all fields.");
+        return;
+    }
+
+    document.querySelector(".status").innerHTML="Submitting...";
+
+    try{
+
+        const response=await fetch("/app/submitdata/",{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify({
+                name:name,
+                password:password
+            })
+
+        });
+
+        const result=await response.text();
+
+        document.querySelector(".status").innerHTML=result;
+
+        document.querySelector(".name").value="";
+        document.querySelector(".password").value="";
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        document.querySelector(".status").innerHTML="Submission Failed";
+
+    }
+
+}
+
+
+
+async function getAllUsers(){
+
+    try{
+
+        const response=await fetch("/app/getall/");
+
+        const users=await response.json();
+
+        let rows="";
+
+        users.forEach(user=>{
+
+            rows+=`
+            <tr>
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+                <td>${user.password}</td>
+            </tr>
+            `;
+
+        });
+
+        document.getElementById("tbody").innerHTML=rows;
+
+        document.querySelector(".table-container").style.display="block";
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert("Unable to fetch users.");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
