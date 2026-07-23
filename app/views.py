@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from app.models import User
+from app.models import User,Student
 import json
 # Create your views here.
 
@@ -22,6 +22,33 @@ def Welcome(request):
 def takedatatemplate(request):
     return render(request,"takedata.html")
 
+
+@csrf_exempt
+def addStudent(request):
+    data=json.loads(request.data)
+    try:
+        s=Student(
+            name=data['name'],
+            cclass=data['cclass'],
+            fee=data['fee'],
+            gender=data['gender']
+        )
+        s.save()
+        return HttpResponse("Student datasuccessfully stored!!!")
+
+    except Exception as e:
+        
+        return HttpResponse("Failed to save student data")
+    return HttpResponse("Failed Operation!!")
+
+@csrf_exempt
+def getstudents(request):
+    try:
+        data=list(Student.objects.values())
+        return JsonResponse(data)
+    except Exception as e:
+        return JsonResponse("failed to laod students data")
+    return JsonResponse("failed to laod students data")
 @csrf_exempt
 def submitdata(request):
 
